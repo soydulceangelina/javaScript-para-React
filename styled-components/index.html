@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container"></div>
+    <script>
+
+        const component = (strings, ...values) => {
+            return function (props){
+                let newContent = strings.slice();
+                // console.log(newContent)
+                values.forEach((val, idx)=>{
+                    newContent[idx] += props[val]
+                })
+                // console.log(values)
+                return newContent.join('')
+            }
+        }
+
+        const styled = {
+            h1: function(styles){
+                return function (content){
+                    return `
+                <h1 style="${styles}">${content}</h1>
+                `
+                }
+            },
+            h2: function(){},
+            div: function(){}
+        }
+
+        const TitleStyled = styled.h1`
+            color: pink;
+            font-family: system-ui;
+            text-shadow: 2px 2px 0 black;
+            font-size: 100px;
+            line-height: 100vh;
+        `
+
+        const props = {
+            message: "Love",
+            error: "Error"
+        }
+
+        const Title = component`<marquee>${'message'}</marquee>`(props);
+
+        const render = (component, container) => {
+            container.innerHTML = component;
+        }
+
+        render(TitleStyled(Title), window.container)
+    </script>
+</body>
+</html>
