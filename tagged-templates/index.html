@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tatted Templates</title>
+    <style>
+        body{
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: system-ui;
+            font-size: 2rem;
+            text-shadow: 1px 1px rgba(0, 0, 0, .5);
+            background: #f9c0c0;
+            color: azure;
+        }
+        strong{
+            background-color: #ccf6c8;
+            color: #ffc93c;
+            padding: .3rem .4rem;
+            border-radius: 20px;
+            border: 2px solid azure;
+        }
+    </style>
+</head>
+<body>
+    <!-- <p>El trabajo duro supera al talento natural</p> -->
+    <script>
+        const taggedTemplate = (strings, ...values) => {
+            // console.log(strings, values)
+            let oracion = '';
+            strings.forEach((str, index) => {
+                let strong = values[index] ? `<strong>${values[index]}</strong>` : "";
+                // console.log(values[index])
+                oracion += `${str}${strong}`;
+            });
+            return `<p>${oracion}</p>`;
+        }
+        const message = taggedTemplate`El ${'trabajo duro'} supera al ${'talento natural'}`;
+        document.body.innerHTML = message;
+    </script>
+</body>
+</html>
